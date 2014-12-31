@@ -20,9 +20,9 @@ PERIOD = 1024 # BUFFER_SIZE*4/N, N=4
 TXLEN = 500 # from dspserver
 PTXLEN = 1024 # for predsp
 
-SAMPLERATE = 96000 # for I/Q input
+SAMPLERATE = 48000 # for I/Q input
 IQDEVSTR = 'PCH'
-RIGCTL = "rigctl -m 229 -r /dev/ttyUSB1 -s 38400"
+RIGCTL = "rigctl -m 229 -s 38400 -r "
 
 class SharedData(object):
 	def __init__(self, predsp=False):
@@ -48,19 +48,11 @@ class ConnectedClient(object):
 class KX3(object):
 	def __init__(self, ad=None, cd=None, swapiq=None):
 		self.ad = ad
-		if not self.ad:
-			self.ad = self.autodetect_ad()
-		rig_freq = pexpect.run(RIGCTL + " f")
-		self.rigctl = pexpect.spawn(RIGCTL)
+		rig_freq = pexpect.run(RIGCTL+cd+" f")
+		self.rigctl = pexpect.spawn(RIGCTL+cd)
 		self.rigctl.timeout = 2.5
 		self.swapiq = swapiq
 		self.set_freq(rig_freq)
-
-	def autodetect_ad(self):
-		try:
-			return 'hw:%s' % (alsaaudio.cards().index(IQDEVSTR))
-		except:
-			return None
 
 	def set_freq(self, freq):
 	    self.rigctl.sendline("F " + str(freq))
@@ -254,9 +246,14 @@ def create_kx3_thread(clients, kx3, idx=0):
 
 # main
 parser = argparse.ArgumentParser(description='kx3-server.py')
+parser.add_argument('serial_device', help = 'the serial device that the KX3 is connected on i.e. /dev/ttyUSB0')
+parser.add_argument('audio_device', help = 'the audio device that the KX3 is connected on i.e. /dev/ttyUSB0')
+parser.add_argument('-r', '--samplerate', type=int, default=48000, help = 'the sample rate for the I/Q data, i.e spectrum bandwidth')
 parser.add_argument('-s', '--swapiq', action='store_true', default=False, help = 'Swap the I and Q inputs, reversing the spectrum')
 parser.add_argument('-p', '--predsp', action='store_true', default=False, help = 'Offload some processing to an instance of predsp.py')
+
 args = parser.parse_args()
+SAMPLERATE = args.samplerate
 
 if args.swapiq:
     print "swapiq is " + str(args.swapiq)
@@ -266,7 +263,7 @@ if args.predsp:
 shared = SharedData(args.predsp)
 
 try:
-    kx3 = KX3(swapiq=args.swapiq)
+    kx3 = KX3(cd=args.serial_device, ad=args.audio_device, swapiq=args.swapiq )
 except IOError:
 	sys.stderr.write('KX3 not found\n')
 	sys.exit(0)

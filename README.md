@@ -1,7 +1,7 @@
 ghpsdr3-kx3-server
 =========================
 
-A KX3 server for ghpsdr3-alex, used with dspserver and QtRadio. 
+A receive only KX3 server for ghpsdr3-alex, used with dspserver and QtRadio. 
 This is based on ghpsdr3-fcdproplus-server: 
     https://github.com/bazuchan/ghpsdr3-fcdproplus-server
 
