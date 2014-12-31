@@ -17,10 +17,25 @@ Todo:
  - Not sure yet.
 
 Basic usage:
- - run kx3-server.py (you may need the -s option to swap the I&Q channels
+ - run kx3-server.py -s /dev/ttyUSB1 hw:0 -r 192000 (or similar)
  - run dspserver
  - run QtRadio
 
+Usage: kx3-server.py [-h] [-r SAMPLERATE] [-s] [-p] serial_device audio_device
+
+positional arguments:
+  serial_device         the serial device that the KX3 is connected on i.e.
+                        /dev/ttyUSB0
+  audio_device          the audio device that the KX3 is connected on i.e.
+                        /dev/ttyUSB0
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -r SAMPLERATE, --samplerate SAMPLERATE
+                        the sample rate for the I/Q data, i.e spectrum
+                        bandwidth
+  -s, --swapiq          Swap the I and Q inputs, reversing the spectrum
+  -p, --predsp          Offload some processing to an instance of predsp.py
 
 Predsp:
 If you want to run kx3-server.py on embedded hardware (like BeagleBone Black),
