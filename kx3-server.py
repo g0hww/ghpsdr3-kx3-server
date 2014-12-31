@@ -247,7 +247,7 @@ def create_kx3_thread(clients, kx3, idx=0):
 # main
 parser = argparse.ArgumentParser(description='kx3-server.py')
 parser.add_argument('serial_device', help = 'the serial device that the KX3 is connected on i.e. /dev/ttyUSB0')
-parser.add_argument('audio_device', help = 'the audio device that the KX3 is connected on i.e. /dev/ttyUSB0')
+parser.add_argument('audio_device', help = 'the audio device that the KX3 is connected on i.e. hw:0')
 parser.add_argument('-r', '--samplerate', type=int, default=48000, help = 'the sample rate for the I/Q data, i.e spectrum bandwidth')
 parser.add_argument('-s', '--swapiq', action='store_true', default=False, help = 'Swap the I and Q inputs, reversing the spectrum')
 parser.add_argument('-p', '--predsp', action='store_true', default=False, help = 'Offload some processing to an instance of predsp.py')
