@@ -14,28 +14,32 @@ Requires:
  - Hamlib (calls rigctl)
 
 Todo:
- - Not sure yet.
+ - Switch to native KX3 control messages, avoiding use of hamlib/rigctl
 
 Basic usage:
- - run kx3-server.py -s /dev/ttyUSB1 hw:0 -r 192000 (or similar)
+ - run kx3-server.py -s -r 192000 /dev/ttyUSB1 hw:0  (or similar)
  - run dspserver
- - run QtRadio
+ - run QtRadio and connect to the dspserver
 
 Usage: kx3-server.py [-h] [-r SAMPLERATE] [-s] [-p] serial_device audio_device
 
-positional arguments:
-  serial_device         the serial device that the KX3 is connected on i.e.
-                        /dev/ttyUSB0
-  audio_device          the audio device that the KX3 is connected on i.e.
-                        /dev/ttyUSB0
+Mandatory arguments:
 
-optional arguments:
+  serial_device         the serial device that the KX3 is connected on i.e. /dev/ttyUSB0
+                        
+  audio_device          the audio device that the KX3 is connected on i.e. hw:0
+
+Optional arguments:
+
   -h, --help            show this help message and exit
+  
   -r SAMPLERATE, --samplerate SAMPLERATE
                         the sample rate for the I/Q data, i.e spectrum
                         bandwidth
-  -s, --swapiq          Swap the I and Q inputs, reversing the spectrum
-  -p, --predsp          Offload some processing to an instance of predsp.py
+                        
+  -s, --swapiq          swap the I and Q inputs, reversing the spectrum
+  
+  -p, --predsp          offload some processing to an instance of predsp.py
 
 Predsp:
 If you want to run kx3-server.py on embedded hardware (like BeagleBone Black),
