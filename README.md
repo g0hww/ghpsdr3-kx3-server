@@ -49,4 +49,18 @@ to host running dspserver. For that purpose there is a script called predsp.py. 
  - on more capable host run 'predsp.py' and 'dspserver --server <embedded host ip>'
  - run QtRadio or another client and point it to dspserver's address
 
+Notes:
+ - Don't touch that dial! Changing the KX3's frequency by any direct means should be avoided.
+ - Make sure the frequency readout on the KX3's display shows a resolution down to 1Hz, otherwise
+a frequency mismatch might occur when the primary receiver in QtRadio changes frequency, as the KX3
+seems to round the requested frequency to the displayed resolution. 
+ - You must ensure that the KX3's filter is set to FL1 and the RX SHFT is off (set to normal),
+otherwise there will be a frequency mismatch in QtRadio.  Once we switch to native KX3 commands,
+we can probably compensate for this.
+ - QtRadio uses a +9kHz offset for the primary receiver (VFO A or B) and a variable offset for 
+the sub-receiver.  If you establish an XIT offset of +9kHz on the KX3 and set the KX3's mode to match the 
+listening mode in QtRadio, you can probably make QSOs using QtRadio as the receiver.
+- To use fldigi with QtRadio and the KX3, with Pulse Audio Volume Control (pavucontrol) you can have
+fldigi listen to the output of QtRadio and transmit to the soundcard interface to your KX3 directly.
+
 
