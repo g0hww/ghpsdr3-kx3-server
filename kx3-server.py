@@ -20,8 +20,7 @@ PERIOD = 1024 # BUFFER_SIZE*4/N, N=4
 TXLEN = 500 # from dspserver
 PTXLEN = 1024 # for predsp
 
-SAMPLERATE = 48000 # for I/Q input
-IQDEVSTR = 'PCH'
+SAMPLERATE = 48000 # default for I/Q input
 RIGCTL = "rigctl -m 229 -s 38400 -r "
 
 class SharedData(object):
@@ -251,6 +250,8 @@ parser.add_argument('audio_device', help = 'the audio device that the KX3 is con
 parser.add_argument('-r', '--samplerate', type=int, default=48000, help = 'the sample rate for the I/Q data, i.e spectrum bandwidth')
 parser.add_argument('-s', '--swapiq', action='store_true', default=False, help = 'Swap the I and Q inputs, reversing the spectrum')
 parser.add_argument('-p', '--predsp', action='store_true', default=False, help = 'Offload some processing to an instance of predsp.py')
+parser.add_argument('-a', '--ipaddr', default='0.0.0.0', help = 'The server\'s IPv4 address to bind to. Default is all addresses, '+
+                                                                'i.e. 0.0.0.0 or 127.0.0.2 (alias addresses can be used)')
 
 args = parser.parse_args()
 SAMPLERATE = args.samplerate
@@ -267,7 +268,7 @@ try:
 except IOError:
 	sys.stderr.write('KX3 not found\n')
 	sys.exit(0)
+	
 ft = create_kx3_thread(shared, kx3, 0)
-
-run_listener(shared, '0.0.0.0', 11000)
+run_listener(shared, args.ipaddr, 11000)
 

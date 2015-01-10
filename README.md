@@ -17,29 +17,31 @@ Todo:
  - Switch to native KX3 control messages, avoiding use of hamlib/rigctl
 
 Basic usage:
- - run kx3-server.py -s -r 192000 /dev/ttyUSB1 hw:0  (or similar)
+ - run kx3-server.py -s -r 192000 /dev/ttyUSB0 hw:0  (or similar)
  - run dspserver
  - run QtRadio and connect to the dspserver
 
-Usage: kx3-server.py [-h] [-r SAMPLERATE] [-s] [-p] serial_device audio_device
+Usage: kx3-server.py [-h] [-r SAMPLERATE] [-s] [-p] [-a IPADDR] serial_device audio_device
 
-Mandatory arguments:
+kx3-server.py
 
-  serial_device         the serial device that the KX3 is connected on i.e. /dev/ttyUSB0
-                        
-  audio_device          the audio device that the KX3 is connected on i.e. hw:0
+positional arguments:
+  serial_device         the serial device that the KX3 is connected on i.e.
+                        /dev/ttyUSB0
+  audio_device          the audio device that the KX3 is connected on i.e.
+                        hw:0
 
-Optional arguments:
-
+optional arguments:
   -h, --help            show this help message and exit
-  
   -r SAMPLERATE, --samplerate SAMPLERATE
                         the sample rate for the I/Q data, i.e spectrum
                         bandwidth
-                        
-  -s, --swapiq          swap the I and Q inputs, reversing the spectrum
-  
-  -p, --predsp          offload some processing to an instance of predsp.py
+  -s, --swapiq          Swap the I and Q inputs, reversing the spectrum
+  -p, --predsp          Offload some processing to an instance of predsp.py
+  -a IPADDR, --ipaddr IPADDR
+                        The server's IPv4 address to bind to. Default is all addresses,
+                        i.e. 0.0.0.0 or 127.0.0.1 (alias addresses can be used)
+
 
 Predsp:
 If you want to run kx3-server.py on embedded hardware (like BeagleBone Black),
@@ -64,5 +66,6 @@ the sub-receiver.  If you establish an XIT offset of +9kHz on the KX3 and set th
 listening mode in QtRadio, you can probably make QSOs using QtRadio as the receiver.
 - To use fldigi with QtRadio and the KX3, with Pulse Audio Volume Control (pavucontrol) you can have
 fldigi listen to the output of QtRadio and transmit to the soundcard interface to your KX3 directly.
+ - Configure the KX3 to use a baud rate of 38400 for CAT control.
 
 
