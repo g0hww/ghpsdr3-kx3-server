@@ -26,19 +26,19 @@ Usage: kx3-server.py [-h] [-r SAMPLERATE] [-s] [-p] [-a IPADDR] serial_device au
 kx3-server.py
 
 positional arguments:
-  serial_device         the serial device that the KX3 is connected on i.e.
+ - serial_device         the serial device that the KX3 is connected on i.e.
                         /dev/ttyUSB0
-  audio_device          the audio device that the KX3 is connected on i.e.
+ - audio_device          the audio device that the KX3 is connected on i.e.
                         hw:0
 
 optional arguments:
-  -h, --help            show this help message and exit
-  -r SAMPLERATE, --samplerate SAMPLERATE
+ - -h, --help            show this help message and exit
+ - -r SAMPLERATE, --samplerate SAMPLERATE
                         the sample rate for the I/Q data, i.e spectrum
                         bandwidth
-  -s, --swapiq          Swap the I and Q inputs, reversing the spectrum
-  -p, --predsp          Offload some processing to an instance of predsp.py
-  -a IPADDR, --ipaddr IPADDR
+ - -s, --swapiq          Swap the I and Q inputs, reversing the spectrum
+ - -p, --predsp          Offload some processing to an instance of predsp.py
+ - -a IPADDR, --ipaddr IPADDR
                         The server's IPv4 address to bind to. Default is all addresses,
                         i.e. 0.0.0.0 (alias addresses can be used)
 
