@@ -40,7 +40,7 @@ optional arguments:
   -p, --predsp          Offload some processing to an instance of predsp.py
   -a IPADDR, --ipaddr IPADDR
                         The server's IPv4 address to bind to. Default is all addresses,
-                        i.e. 0.0.0.0 or 127.0.0.1 (alias addresses can be used)
+                        i.e. 0.0.0.0 (alias addresses can be used)
 
 
 Predsp:

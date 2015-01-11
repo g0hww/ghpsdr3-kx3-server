@@ -168,6 +168,7 @@ class ListenerHandler(SocketServer.BaseRequestHandler):
 				shared.release()
 				self.request.sendall('OK')
 				continue
+			## Don't crash QtRadio by telling it that this is a KX3! 
 			#m = re.search('^hardware\?', data, re.M)
 			#if m:
 			#	self.request.sendall('OK KX3')
@@ -251,7 +252,7 @@ parser.add_argument('-r', '--samplerate', type=int, default=48000, help = 'the s
 parser.add_argument('-s', '--swapiq', action='store_true', default=False, help = 'Swap the I and Q inputs, reversing the spectrum')
 parser.add_argument('-p', '--predsp', action='store_true', default=False, help = 'Offload some processing to an instance of predsp.py')
 parser.add_argument('-a', '--ipaddr', default='0.0.0.0', help = 'The server\'s IPv4 address to bind to. Default is all addresses, '+
-                                                                'i.e. 0.0.0.0 or 127.0.0.2 (alias addresses can be used)')
+                                                                'i.e. 0.0.0.0 (alias addresses can be used)')
 
 args = parser.parse_args()
 SAMPLERATE = args.samplerate
