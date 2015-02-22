@@ -64,8 +64,12 @@ we can probably compensate for this.
  - QtRadio uses a +9kHz offset for the primary receiver (VFO A or B) and a variable offset for 
 the sub-receiver.  If you establish an XIT offset of +9kHz on the KX3 and set the KX3's mode to match the 
 listening mode in QtRadio, you can probably make QSOs using QtRadio as the receiver.
-- To use fldigi with QtRadio and the KX3, with Pulse Audio Volume Control (pavucontrol) you can have
+ - To use fldigi with QtRadio and the KX3, with Pulse Audio Volume Control (pavucontrol) you can have
 fldigi listen to the output of QtRadio and transmit to the soundcard interface to your KX3 directly.
+ - You can use wsjtx with QtRadio and the KX3 using the same technique as described above for fldigi. Note 
+that the split feature doesn't work with wsjtx and QtRadio and QtRadio knows nothing about the KX3's
+transmitter.  The split feature isn't really useful, as the KX3 isn't thought to be stable enough for JT9
+transmission anyway.  I have made JT-65 contacts this way though.
  - Configure the KX3 to use a baud rate of 38400 for CAT control.
 
 
