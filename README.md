@@ -61,15 +61,18 @@ seems to round the requested frequency to the displayed resolution.
  - You must ensure that the KX3's filter is set to FL1 and the RX SHFT is off (set to normal),
 otherwise there will be a frequency mismatch in QtRadio.  Once we switch to native KX3 commands,
 we can probably compensate for this.
- - QtRadio uses a +9kHz offset for the primary receiver (VFO A or B) and a variable offset for 
+ - By default a +9kHz offset is used for the primary receiver (VFO A or B) and a variable offset for 
 the sub-receiver.  If you establish an XIT offset of +9kHz on the KX3 and set the KX3's mode to match the 
-listening mode in QtRadio, you can probably make QSOs using QtRadio as the receiver.
+listening mode in QtRadio, you can probably make QSOs using QtRadio as the receiver. However, an easier
+solution is to invoke dspserver with the "--lo 0" option.  This gives the main receiver in QtRadio a 0Hz
+offset, which is very convenient.
  - To use fldigi with QtRadio and the KX3, with Pulse Audio Volume Control (pavucontrol) you can have
 fldigi listen to the output of QtRadio and transmit to the soundcard interface to your KX3 directly.
  - You can use wsjtx with QtRadio and the KX3 using the same technique as described above for fldigi. Note 
-that the split feature doesn't work with wsjtx and QtRadio and QtRadio knows nothing about the KX3's
+that the split feature doesn't work with wsjtx and QtRadio as QtRadio knows nothing about the KX3's
 transmitter.  The split feature isn't really useful, as the KX3 isn't thought to be stable enough for JT9
 transmission anyway.  I have made JT-65 contacts this way though.
  - Configure the KX3 to use a baud rate of 38400 for CAT control.
+ - Pull request #31 in ghpsdr3-alex adds roughly calibrated s-meter and power spectrum scaling for a KX3 used with an Asus Xonar U7 soundcard  to dsperver (https://github.com/alexlee188/ghpsdr3-alex/pull/31).
 
 
