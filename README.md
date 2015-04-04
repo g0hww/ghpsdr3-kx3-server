@@ -18,7 +18,7 @@ Todo:
 
 Basic usage:
  - run kx3-server.py -s -r 192000 /dev/ttyUSB0 hw:0  (or similar)
- - run dspserver
+ - run dspserver --soundcard U7_KX3 --lo 0 (or similar)
  - run QtRadio and connect to the dspserver
 
 Usage: kx3-server.py [-h] [-r SAMPLERATE] [-s] [-p] [-a IPADDR] serial_device audio_device
@@ -58,14 +58,12 @@ selected VFO for QtRadios primary receiver.
  - Make sure the frequency readout on the KX3's display shows a resolution down to 1Hz, otherwise
 a frequency mismatch might occur when the primary receiver in QtRadio changes frequency, as the KX3
 seems to round the requested frequency to the displayed resolution. 
- - You must ensure that the KX3's filter is set to FL1 and the RX SHFT is off (set to normal),
-otherwise there will be a frequency mismatch in QtRadio.  Once we switch to native KX3 commands,
-we can probably compensate for this.
+ - You must ensure that the KX3's filter is set to FL1 and the RX SHFT is off (set to normal), otherwise there will be a frequency mismatch in QtRadio.  Once we switch to native KX3 commands, we can probably compensate for this.
  - By default a +9kHz offset is used for the primary receiver (VFO A or B) and a variable offset for 
 the sub-receiver.  If you establish an XIT offset of +9kHz on the KX3 and set the KX3's mode to match the 
 listening mode in QtRadio, you can probably make QSOs using QtRadio as the receiver. However, an easier
 solution is to invoke dspserver with the "--lo 0" option.  This gives the main receiver in QtRadio a 0Hz
-offset, which is very convenient.
+offset, which is very convenient, but might not any good for listening to AM without using the sub-receiver (YMMV).
  - To use fldigi with QtRadio and the KX3, with Pulse Audio Volume Control (pavucontrol) you can have
 fldigi listen to the output of QtRadio and transmit to the soundcard interface to your KX3 directly.
  - You can use wsjtx with QtRadio and the KX3 using the same technique as described above for fldigi. Note 
