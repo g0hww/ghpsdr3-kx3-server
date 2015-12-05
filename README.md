@@ -53,8 +53,7 @@ to host running dspserver. For that purpose there is a script called predsp.py. 
 
 Notes:
  - Don't touch that dial! Changing the KX3's frequency by any direct means should be avoided.
- If you nudge the tuning knob, set it back where it was.  The rig should be tuned 9kHz below the
-selected VFO for QtRadios primary receiver.
+ If you nudge the tuning knob, set it back where it was.  Unless you have invoked the dspserver with "--lo 0", the KX3 should be tuned 9kHz below the selected VFO for QtRadios primary receiver.
  - Make sure the frequency readout on the KX3's display shows a resolution down to 1Hz, otherwise
 a frequency mismatch might occur when the primary receiver in QtRadio changes frequency, as the KX3
 seems to round the requested frequency to the displayed resolution. 
