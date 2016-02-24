@@ -20,7 +20,6 @@ PERIOD = 1024 # BUFFER_SIZE*4/N, N=4
 TXLEN = 500 # from dspserver
 PTXLEN = 1024 # for predsp
 
-SAMPLERATE = 48000 # default for I/Q input
 RIGCTL = "rigctl -m 229 -s 38400 -r "
 
 class SharedData(object):
